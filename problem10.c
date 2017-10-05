@@ -5,28 +5,28 @@
 #define UPPER 2000000
 
 long long sieve(int upper){
-  int* bool_list = (int*) malloc(upper * sizeof(int));
+  int bool_list[upper]; 
   int j;
   for(j = 0; j < upper; j++){
-    *(bool_list + j) = 1;
+    bool_list[j] = 1;
   }
   int test_int = 2;
   double root = sqrt(upper);
-  while(test_int < root){
+  while(test_int <= root){
     int mult = test_int;
     while(mult + test_int < upper){
       mult += test_int;
-      *(bool_list + mult) = 0;
+      bool_list[mult] = 0;
     }
     test_int++;
-    while(! *(bool_list + test_int)){
+    while(!bool_list[test_int] && test_int <= root){
       test_int++;
     }
   }
   int i;
   long long sum = 0;
   for(i = 2; i < upper; i++){
-    if(*(bool_list + i)){
+    if(bool_list[i]){
       sum += i;
     }
   }

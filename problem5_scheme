@@ -1,0 +1,16 @@
+#lang planet neil/sicp
+
+(define (divisible? dividend divisor)
+  (= (remainder dividend divisor) 0))
+
+(define (smallest-evenly-divisible n)
+  (define (test-divisable test-dividend)
+    (define (iter n)
+      (cond ((= n 1) true)
+            ((divisible? test-dividend n)
+             (iter (- n 1)))
+            (else false)))
+    (if (iter n)
+        test-dividend
+        (test-divisable (+ test-dividend n))))
+  (test-divisable (* 2 n)))

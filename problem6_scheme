@@ -1,0 +1,31 @@
+#lang planet neil/sicp
+
+(define (square x) (* x x))
+
+(define (enumerate a b)
+  (if (> a b)
+      '()
+      (cons a (enumerate (+ a 1) b))))
+
+(define (accumulate op accumulation operands)
+  (if (null? operands)
+      accumulation
+      (accumulate op (op accumulation (car operands)) (cdr operands))))
+
+(define (map proc args)
+  (if (null? args)
+      '()
+      (cons (proc (car args)) (map proc (cdr args)))))
+
+(define (sum-of-squares n)
+  (accumulate +
+              0
+              (map square (enumerate 1 n))))
+             
+(define (square-of-sum n)
+  (square (accumulate +
+                      0
+                      (enumerate 1 n))))
+
+(define (difference n)
+  (- (square-of-sum n) (sum-of-squares n)))

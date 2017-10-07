@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #define MAX_SIZE 1000000
-#define MAX 1000
+#define MAX_CO 1000
 #define quadratic(n, a, b) ( (n * n) + (a * n) + (b) )
 
 void populate_sieve(int upper, short bool_list[]){
@@ -38,8 +38,8 @@ void print_primes(int n, short sieve[]){
 
 
 long coefficient_product(){
-  int a = -999;
-  int b = 2;
+  int a;
+  int b;
   long y;
   long product;
   int n;
@@ -48,8 +48,8 @@ long coefficient_product(){
   
   populate_sieve(MAX_SIZE, sieve);
   
-  while(a < 1000){
-    while(b < 1000){
+  for(a = -MAX_CO + 1; a < MAX_CO; a++){
+    for(b = 2; b < MAX_CO; b++){
       n = 0;
       y = quadratic(n, a, b);
       while(y > 0 && sieve[y]){
@@ -60,10 +60,7 @@ long coefficient_product(){
 	cycle_seen = n;
 	product = a * b;
       }
-      b++;
     }
-    a++;
-    b = 2;
   }
 
   return product;

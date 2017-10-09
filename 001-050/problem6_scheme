@@ -1,4 +1,4 @@
-#lang planet neil/sicp
+#lang racket
 
 (define (square x) (* x x))
 

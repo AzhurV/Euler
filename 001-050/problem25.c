@@ -3,7 +3,7 @@
 #define MAX_SIZE 1024
 #define DIGITS_N 1000
 
-void copy_fib(int fib_1[MAX_SIZE], int fib_2[MAX_SIZE], int next[MAX_SIZE]){
+void copy_fib(char fib_1[MAX_SIZE], char fib_2[MAX_SIZE], char next[MAX_SIZE]){
   int i;
   for(i = 0; i < MAX_SIZE; i++){
     fib_1[i] = fib_2[i];

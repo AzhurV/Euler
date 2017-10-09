@@ -1,23 +1,29 @@
 def is_palindrome(n):
-    n = str(n)
-    l = len(n)
-    for i in range(0, l // 2):
-        if n[i] != n[-i - 1]:
+    digits = str(n)
+    end_i = len(digits) - 1
+    start_i = 0
+
+    while start_i < end_i:
+        if digits[start_i] != digits[end_i]:
             return False
+        start_i += 1
+        end_i -= 1
+
     return True
 
-def largest_palindrome_product(digits):
-    mult = 0
-    while digits > 0:
-        mult = mult * 10 + 9
-        digits -= 1
-    aug = mult
-    while aug > 0:
-        prod = mult * aug
-        if is_palindrome(prod):
-            return prod
-        aug -= 1
-    return None
+def max_palindrome():
+    max_pal = 0
+    for a in range(1000):
+        for b in range(a + 1):
+            n = a * b
+            if is_palindrome(n) and n > max_pal:
+                max_pal = n
 
-print(largest_palindrome_product(3))
-        
+    return max_pal
+
+def main():
+    n = max_palindrome()
+    print(n)
+
+if __name__ == "__main__":
+    main()

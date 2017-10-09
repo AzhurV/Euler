@@ -21,7 +21,7 @@ def total_score():
     names.sort()
     total = 0
     for i in range(len(names)):
-        total += name_score(names[i], i)
+        total += name_score(names[i], i + 1)
     return total
 
 if __name__ == "__main__":

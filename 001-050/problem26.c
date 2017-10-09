@@ -1,50 +1,42 @@
 #include <stdio.h>
-#define MAX_CYCLE 1000
+#define UPPER 1000
+#define SIZE 10
 
 
-void zero_out(int size, int buf[size]){
-  int i;
-  for(i = 0; i < size; i++){
-    buf[i] = 0;
-  }
-  return;
-}
-
-
-int longest_cycle(int n){
-  int buf[n];
-  int max_seq_len = 0;
+int longest_cycle(){
   int denom;
-  int cur_val, cur_pos;
+  int num;
+  int max_cycle = 0;
+  int max_cycle_denom = 0;
+  int i;
 
-  for(denom = n; denom > 1; denom--){
-    if(max_seq_len >= denom){
-      break;
-    }
-    
-    cur_val = 1;
-    cur_pos = 0;
+  for(denom = 2; denom <= UPPER; denom++){
+    int seen[UPPER] = { 0 };
+    num = 1;
+    i = 0;
 
-    while(buf[cur_val] == 0 && cur_val != 0){
-      buf[cur_val] = cur_pos;
-      cur_val *= 10;
-      cur_val %= denom;
-      cur_pos++;
+    while(!seen[num] && num != 0){
+      seen[num] = i;
+      num *= 10;
+      num = num % denom;
+      i++;
     }
 
-    if(cur_pos - buf[cur_val] > max_seq_len){
-      max_seq_len = cur_pos - buf[cur_val];
+    if(i - seen[num] > max_cycle){
+      max_cycle = i - seen[num];
+      max_cycle_denom = denom;
     }
-    zero_out(n, buf);
   }
-  return max_seq_len;
+  
+return max_cycle_denom;
 }
 
 
-int main(){
-  int cycle_size;
-  cycle_size = longest_cycle(MAX_CYCLE);
-  printf("Longest cycle is %d\n", cycle_size);
+int main(void){
+  int max_denom = longest_cycle();
+
+  printf("%d\n", max_denom);
 
   return 0;
 }
+
